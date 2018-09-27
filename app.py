@@ -13,6 +13,7 @@ from flask.views import MethodView
 # MEMCACHE_URL = os.environ.get('MEMCACHE_URL', '127.0.0.1:11211').split(',')
 DEBUG = os.environ.get('DEBUG', False) in ('true', '1', 'y', 'yes')
 GITHUB_OAUTH_TOKEN = os.environ.get('GITHUB_OAUTH_TOKEN')
+GITHUB_BASE_URL = os.environ.get('GITHUB_BASE_URL', "https://api.github.com/")
 
 APP_LOCATION = 'app'
 if os.path.isdir('./dist') and os.listdir('./dist'):
@@ -126,7 +127,7 @@ class ProxyView(MethodView):
 class GithubProxyView(ProxyView):
 
     prefix = 'github'
-    base = 'https://api.github.com/'
+    base = GITHUB_BASE_URL
 
 
 class BugzillaProxyView(ProxyView):
